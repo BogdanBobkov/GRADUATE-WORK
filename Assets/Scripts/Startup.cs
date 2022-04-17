@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Morpeh;
+using Scripts.ECS.Entities;
+using Scripts.ECS.Systems;
 using UnityEngine;
 
 namespace Scripts
@@ -16,10 +18,19 @@ namespace Scripts
             var enumerator = AddressablesLocator.Load(addressableLabels, () =>
             {
                 var systemsGroup = World.Default.CreateSystemsGroup();
+                
+                systemsGroup.AddInitializer(new MainMenuMechanicsSystem());
             
                 World.Default.AddSystemsGroup(order: 0, systemsGroup);
+
+                StartGame();
             });
             StartCoroutine(enumerator);
+        }
+        
+        private void StartGame()
+        {
+            GuiEntity.AddComponent<GuiTutorialComponent>();
         }
     }
 }

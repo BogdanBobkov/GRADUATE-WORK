@@ -1,4 +1,4 @@
-namespace Scripts.UI
+namespace Scripts.GUI
 {
     public interface IUiInstance
     {

@@ -4,7 +4,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
-namespace Scripts.UI
+namespace Scripts.GUI
 {
     public class UiInstance<T> : IUiInstance where T : MonoBehaviour
     {
@@ -13,30 +13,32 @@ namespace Scripts.UI
         
         private AsyncOperationHandle<Object> _asyncOperation;
 
-        public UiInstance(string name, Action onLoad, Action onDestroy)
+        public UiInstance(string name, Action<T> onLoad = null, Action<T> onDestroy = null)
         {
             _asyncOperation = Addressables.LoadAssetAsync<Object>(AddressablesLocator.GetResourceLocation("gui_prefabs", name));
             _asyncOperation.Completed += handle =>
             {
-                Instance = (GameObject) handle.Result;
+                Instance = Object.Instantiate((GameObject)handle.Result);
                 Component = Instance.GetComponent<T>();
+                onLoad?.Invoke(Component);
                 Addressables.Release(handle);
             };
         }
 
         public void Destroy()
         {
-            throw new NotImplementedException();
+            if(!_asyncOperation.IsDone) Addressables.Release(_asyncOperation);
+            Object.Destroy(Instance);
         }
 
         public void Show()
         {
-            throw new NotImplementedException();
+            Instance.SetActive(true);
         }
 
         public void Hide()
         {
-            throw new NotImplementedException();
+            Instance.SetActive(false);
         }
     }
 }
