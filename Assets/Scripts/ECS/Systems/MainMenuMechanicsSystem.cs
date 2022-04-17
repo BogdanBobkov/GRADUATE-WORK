@@ -1,3 +1,4 @@
+using GUI;
 using Morpeh;
 using Scripts.GUI;
 using Scripts.GUI.MonoBehaviours;
@@ -21,7 +22,8 @@ namespace Scripts.ECS.Systems
         {
             foreach (var entity in _filter)
             {
-                _instance = new UiInstance<MainMenuComponent>("main_menu",
+                _instance = new UiInstance<MainMenuComponent>("main_menu", 
+                    GlobalContextCore.CanvasLayerLocator.GetCanvasObject(CanvasLayer.UI),
                     onLoad: component =>
                     {
                         component.OnCloseClick += Close;

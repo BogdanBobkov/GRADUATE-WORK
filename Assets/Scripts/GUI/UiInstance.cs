@@ -13,12 +13,12 @@ namespace Scripts.GUI
         
         private AsyncOperationHandle<Object> _asyncOperation;
 
-        public UiInstance(string name, Action<T> onLoad = null, Action<T> onDestroy = null)
+        public UiInstance(string name, GameObject parent, Action<T> onLoad = null, Action<T> onDestroy = null)
         {
             _asyncOperation = Addressables.LoadAssetAsync<Object>(AddressablesLocator.GetResourceLocation("gui_prefabs", name));
             _asyncOperation.Completed += handle =>
             {
-                Instance = Object.Instantiate((GameObject)handle.Result);
+                Instance = Object.Instantiate((GameObject)handle.Result, parent.transform);
                 Component = Instance.GetComponent<T>();
                 onLoad?.Invoke(Component);
                 Addressables.Release(handle);

@@ -8,12 +8,12 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace Scripts
 {
-    public static class AddressablesLocator
+    public class AddressablesLocator
     {
-        private static Dictionary<string, Dictionary<string, IResourceLocation>> resourceLocationsByLabels =
+        private Dictionary<string, Dictionary<string, IResourceLocation>> resourceLocationsByLabels =
             new Dictionary<string, Dictionary<string, IResourceLocation>>();
 
-        public static IEnumerator Load(List<string> labels, Action callback)
+        public IEnumerator Load(List<string> labels, Action callback)
         {
             foreach (var label in labels)
             {
@@ -43,7 +43,7 @@ namespace Scripts
             callback?.Invoke();
         }
 
-        public static IResourceLocation GetResourceLocation(string label, string name)
+        public IResourceLocation GetResourceLocation(string label, string name)
         {
             if (!resourceLocationsByLabels.ContainsKey(label))
             {
