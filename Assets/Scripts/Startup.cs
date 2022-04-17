@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Morpeh;
 using UnityEngine;
 
@@ -7,9 +8,18 @@ namespace Scripts
     {
         void Start()
         {
-            var systemsGroup = World.Default.CreateSystemsGroup();
+            var addressableLabels = new List<string>
+            {
+                "gui_prefabs"
+            };
+
+            var enumerator = AddressablesLocator.Load(addressableLabels, () =>
+            {
+                var systemsGroup = World.Default.CreateSystemsGroup();
             
-            World.Default.AddSystemsGroup(order: 0, systemsGroup);
+                World.Default.AddSystemsGroup(order: 0, systemsGroup);
+            });
+            StartCoroutine(enumerator);
         }
     }
 }
