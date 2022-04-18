@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using GUI;
 using Morpeh;
-using Scripts.ECS.Entities;
 using Scripts.ECS.Systems;
 using Scripts.GUI;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Scripts
 {
     public class Startup : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             GlobalContextCore.Camera = Camera.main;
             GlobalContextCore.CanvasLayerLocator = new CanvasLayerLocator(CanvasLayer.GetAllCanvasLayers());
@@ -25,7 +23,8 @@ namespace Scripts
             {
                 var systemsGroup = World.Default.CreateSystemsGroup();
                 
-                systemsGroup.AddInitializer(new MainMenuMechanicsSystem());
+                systemsGroup.AddSystem(new GuiTutorialSystem());
+                systemsGroup.AddSystem(new GuiMainHudSystem());
             
                 World.Default.AddSystemsGroup(order: 0, systemsGroup);
 
@@ -36,7 +35,9 @@ namespace Scripts
         
         private void StartGame()
         {
-            GuiEntity.AddComponent<GuiTutorialComponent>();
+            var tutorialEntity = World.Default.CreateEntity();
+            tutorialEntity.AddComponent<GuiTutorialComponent>();
+            tutorialEntity.AddComponent<DirtyComponent<GuiTutorialComponent>>();
         }
     }
 }

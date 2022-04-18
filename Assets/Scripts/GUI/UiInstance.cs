@@ -15,7 +15,7 @@ namespace Scripts.GUI
 
         public UiInstance(string name, GameObject parent, Action<T> onLoad = null, Action<T> onDestroy = null)
         {
-            _asyncOperation = Addressables.LoadAssetAsync<Object>(AddressablesLocator.GetResourceLocation("gui_prefabs", name));
+            _asyncOperation = Addressables.LoadAssetAsync<Object>(GlobalContextCore.AddressablesLocator.GetResourceLocation("gui_prefabs", name));
             _asyncOperation.Completed += handle =>
             {
                 Instance = Object.Instantiate((GameObject)handle.Result, parent.transform);

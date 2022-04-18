@@ -1,15 +1,18 @@
-using GUI;
 using Morpeh;
 using Scripts.GUI;
 using Scripts.GUI.MonoBehaviours;
+using Unity.IL2CPP.CompilerServices;
 
 namespace Scripts.ECS.Systems
 {
-    public class MainMenuMechanicsSystem : ISystem
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+    public class GuiTutorialSystem : ISystem
     {
         public World World { get; set; }
         private Filter _filter;
-        private UiInstance<MainMenuComponent> _instance;
+        private UiInstance<GuiTutorialPanelComponent> _instance;
 
         public void OnAwake()
         {
@@ -22,11 +25,15 @@ namespace Scripts.ECS.Systems
         {
             foreach (var entity in _filter)
             {
-                _instance = new UiInstance<MainMenuComponent>("main_menu", 
+                _instance = new UiInstance<GuiTutorialPanelComponent>("tutorial_panel", 
                     GlobalContextCore.CanvasLayerLocator.GetCanvasObject(CanvasLayer.UI),
                     onLoad: component =>
                     {
                         component.OnCloseClick += Close;
+                    },
+                    onDestroy: component =>
+                    {
+                        entity.Dispose();
                     });
 
                 entity.RemoveComponent<GuiTutorialComponent>();
@@ -41,7 +48,7 @@ namespace Scripts.ECS.Systems
 
         public void Dispose()
         {
-
+            _filter = null;
         }
     }
 }

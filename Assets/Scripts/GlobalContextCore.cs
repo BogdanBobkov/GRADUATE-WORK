@@ -1,4 +1,4 @@
-using GUI;
+using Scripts.GUI;
 using UnityEngine;
 
 namespace Scripts

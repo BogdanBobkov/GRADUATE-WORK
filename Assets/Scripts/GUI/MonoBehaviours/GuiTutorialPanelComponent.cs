@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Scripts.GUI.MonoBehaviours
 {
-    public class MainMenuComponent : MonoBehaviour
+    public class GuiTutorialPanelComponent : MonoBehaviour
     {
         [Header("References")] 
         [SerializeField] private Button _CloseButton;

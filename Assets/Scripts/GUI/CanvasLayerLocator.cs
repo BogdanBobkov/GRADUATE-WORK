@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GUI
+namespace Scripts.GUI
 {
     public class CanvasLayerLocator
     {
