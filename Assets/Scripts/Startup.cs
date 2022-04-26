@@ -34,13 +34,9 @@ namespace Scripts
             });
             StartCoroutine(enumerator);
         }
-        
+
         private void StartGame()
         {
-            var mainHudEntity = World.Default.CreateEntity();
-            mainHudEntity.AddComponent<GuiMainHudComponent>();
-            mainHudEntity.AddComponent<DirtyComponent<GuiMainHudComponent>>();
-            
             var tutorialEntity = World.Default.CreateEntity();
             tutorialEntity.AddComponent<GuiTutorialComponent>();
             tutorialEntity.AddComponent<DirtyComponent<GuiTutorialComponent>>();

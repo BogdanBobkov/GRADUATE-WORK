@@ -44,6 +44,10 @@ namespace Scripts.ECS.Systems
         {
             _instance?.Destroy();
             _instance = null;
+            
+            var mainHudEntity = World.Default.CreateEntity();
+            mainHudEntity.AddComponent<GuiMainHudComponent>();
+            mainHudEntity.AddComponent<DirtyComponent<GuiMainHudComponent>>();
         }
 
         public void Dispose()
