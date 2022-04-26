@@ -153,6 +153,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.DefaultCompany.GraduateWork
     Standalone: com.DefaultCompany.GraduateWork
   buildNumber:
     Standalone: 0
@@ -701,6 +702,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
+    Android: MORPEH;MORPEH_BURST
     Standalone: MORPEH;MORPEH_BURST
   additionalCompilerArguments: {}
   platformArchitecture: {}
