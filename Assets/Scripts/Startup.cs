@@ -13,26 +13,16 @@ namespace Scripts
         {
             GlobalContextCore.Camera = Camera.main;
             GlobalContextCore.CanvasLayerLocator = new CanvasLayerLocator(CanvasLayer.GetAllCanvasLayers());
-            GlobalContextCore.AddressablesLocator = new AddressablesLocator();
             GlobalContextCore.LoaderPickerManager = new LoaderPickerManager();
-            
-            var addressableLabels = new List<string>
-            {
-                "gui_prefabs"
-            };
 
-            var enumerator = GlobalContextCore.AddressablesLocator.Load(addressableLabels, () =>
-            {
-                var systemsGroup = World.Default.CreateSystemsGroup();
+            var systemsGroup = World.Default.CreateSystemsGroup();
                 
-                systemsGroup.AddSystem(new GuiMainHudSystem());
-                systemsGroup.AddSystem(new GuiTutorialSystem());
+            systemsGroup.AddSystem(new GuiMainHudSystem());
+            systemsGroup.AddSystem(new GuiTutorialSystem());
             
-                World.Default.AddSystemsGroup(order: 0, systemsGroup);
+            World.Default.AddSystemsGroup(order: 0, systemsGroup);
 
-                StartGame();
-            });
-            StartCoroutine(enumerator);
+            StartGame();
         }
 
         private void StartGame()

@@ -8,7 +8,6 @@ namespace Scripts
     {
         public static Camera Camera;
         public static CanvasLayerLocator CanvasLayerLocator;
-        public static AddressablesLocator AddressablesLocator;
         public static LoaderPickerManager LoaderPickerManager;
     }
 }
