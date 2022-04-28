@@ -21,7 +21,6 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/UI
     m_ReadOnly: 0
     m_SerializedLabels:
-    - ui
     - gui_prefabs
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 63d869aebb0db8e45ba956917f24a7fe, type: 2}
