@@ -1,3 +1,5 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
 using Morpeh;
 using Scripts.GUI;
 using Scripts.GUI.MonoBehaviours;
@@ -5,6 +7,7 @@ using TriLibCore;
 using TriLibCore.Extensions;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Scripts.ECS.Systems
 {
@@ -17,6 +20,8 @@ namespace Scripts.ECS.Systems
         private Filter _filter;
         private UiInstance<GuiHudMainComponent> _instance;
         private GameObject _gameObject;
+
+        public static event Action<GameObject> OnLoadGameObject;
 
         public void OnAwake()
         {
@@ -55,22 +60,14 @@ namespace Scripts.ECS.Systems
         private void OnLoadClickHandler()
         {
             GlobalContextCore.LoaderPickerManager.LoadModel();
-            _instance.Component.SetStateButton(false);
         }
 
         private void OnLoadHandler(AssetLoaderContext context)
         {
-            if (_gameObject != null)
-            {
-                Object.Destroy(_gameObject);
-            }
-            _gameObject = context.RootGameObject;
-            if (_gameObject != null)
-            {
-                GlobalContextCore.Camera.FitToBounds(context.RootGameObject, 2f);
-            }
-            
+            GlobalContextCore.Camera.FitToBounds(context.RootGameObject, 2f);
             _instance.Component.SetStateButton(true);
+            
+            OnLoadGameObject?.Invoke(context.RootGameObject);
         }
         
         #endregion

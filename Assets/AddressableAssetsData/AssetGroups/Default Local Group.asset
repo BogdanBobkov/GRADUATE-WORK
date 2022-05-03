@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - gui_prefabs
+  - m_GUID: 1ddf325be431b4c43a67a40903d94db5
+    m_Address: Assets/Prefabs/AR
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ar_prefabs
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 63d869aebb0db8e45ba956917f24a7fe, type: 2}
   m_SchemaSet:

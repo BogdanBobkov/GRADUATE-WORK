@@ -85,6 +85,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - gui_prefabs
+    - ar_prefabs
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 10eb199c69d6fd14190210e6695f4d52, type: 2}

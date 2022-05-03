@@ -19,6 +19,7 @@ namespace Scripts
                 
             systemsGroup.AddSystem(new GuiMainHudSystem());
             systemsGroup.AddSystem(new GuiTutorialSystem());
+            systemsGroup.AddSystem(new PlaneTrackingSystem());
             
             World.Default.AddSystemsGroup(order: 0, systemsGroup);
 

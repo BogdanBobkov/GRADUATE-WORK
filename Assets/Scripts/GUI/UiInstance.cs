@@ -20,19 +20,13 @@ namespace Scripts.GUI
 
         public UiInstance(string name, GameObject parent, Action<T> onLoad = null, Action<T> onDestroy = null)
         {
-            _resourceOperation = Addressables.LoadResourceLocationsAsync("gui_prefabs", typeof(object));
-            _resourceOperation.Completed += handleLocation =>
-                {
-                    var location = handleLocation.Result.FirstOrDefault(t => Path.GetFileNameWithoutExtension(t.ToString()) == name);
-            
-                    _asyncOperation = Addressables.LoadAssetAsync<Object>(location);
-                    _asyncOperation.Completed += handle =>
-                    {
-                        Instance = Object.Instantiate((GameObject)handle.Result, parent.transform);
-                        Component = Instance.GetComponent<T>();
-                        onLoad?.Invoke(Component);
-                    };
-                };
+            AddressablesUtils.Load<GameObject>("gui_prefabs", name, (handle) =>
+            {                        
+                Instance = Object.Instantiate(handle.Result, parent.transform);
+                Component = Instance.GetComponent<T>();
+                onLoad?.Invoke(Component);
+                
+            });
         }
 
         public void Destroy()
